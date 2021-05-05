@@ -1,0 +1,695 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+#include<conio.h>
+
+// Note
+// For reducing the stress plz use the directories of your own pcs or laptops in the filing.
+// Some of the names of variables or functions need improvement. Update: WIll BE DONE AFTER THE COMPLETION OF THE PROJECT
+// And ignore the function empty_rooms, I am still working on some of its features.
+// One more function remove hosteler will be added after sumsam completes the hosteler module.
+
+int rooms[10], rent = 7000; // Global Variables
+                     
+                     
+                          
+//==================================================hostelers functions                     
+int logout(void);                                       
+booking(){	// Checking the status for rooms
+	FILE *fptr;
+	int i=0,room[10],test=0,a=1,r;
+	char croom[15];
+	char emp[]="empty";
+	fptr = fopen("C:\\Users\\A.S Computers\\Desktop\\project functions\\hostel.txt", "r");	
+   		// Reading the file rooms.txt into an array c[]
+	while(!feof(fptr))
+    {	
+    	fscanf(fptr, "%s", croom);
+    	fflush(stdin);
+		if(strcmp(croom,emp)==0){
+		printf("room %d : Empty\n",i+1,croom);
+		i++;
+		room[i]=a;
+		a++;}
+			else{
+			printf("Room %d : Reserved\n", i+1);
+			i++;
+			a++;}
+	}
+	fclose(fptr);
+	FILE *fc;
+	fc= fopen("C:\\Users\\A.S Computers\\Desktop\\booking.txt","a");
+	printf("which room do who want to choose?\n");
+	printf("room no:");
+	scanf("%d",&r);
+	for(i=0;i<a;i++){
+	if(room[i]==r)
+	{
+	test =1;	
+	char name[100],number[15];
+	printf("please enter your full name:");
+	fflush(stdin);
+	gets(name);
+	fflush(stdin);
+	printf("please enter your number:");
+	fflush(stdin);
+	gets(number);
+	fflush(stdin);
+	fprintf(fc,"\nName: %s number=%s \n Requested to book room no %d ",name,number,r);
+	printf("your request has been submitted to the owner");
+				}
+	}
+	if(test==0){
+	printf("the choosen room is reserved please choose another room");
+	}
+	fclose(fc);
+}
+
+//==============================================================booking room function ends here
+
+changeroom(){	// Checking the status for rooms
+	FILE *fptr;
+	int i=0,room[10],test=0,a=1,r,cr;
+	char croom[15];
+	char emp[]="empty";
+	fptr = fopen("C:\\Users\\A.S Computers\\Desktop\\project functions\\hostel.txt", "r");	
+   		// Reading the file rooms.txt into an array c[]
+	while(!feof(fptr))
+    {	
+    	fscanf(fptr, "%s", croom);
+    	fflush(stdin);
+		if(strcmp(croom,emp)==0){
+		printf("room %d : Empty\n",i+1,croom);
+		i++;
+		room[i]=a;
+		a++;}
+			else{
+			printf("Room %d : Reserved\n", i+1);
+			i++;
+			a++;}
+	}
+	fclose(fptr);
+	FILE *fc;
+	fc= fopen("C:\\Users\\A.S Computers\\Desktop\\changeroom.txt","a");
+	printf("enter your current room:");
+	printf("room no:");
+	scanf("%d",&cr);
+	printf("with which room do who want to change your room?\n");
+	printf("room no:");
+	scanf("%d",&r);
+	for(i=0;i<a;i++){
+	if(room[i]==r)
+	{
+	test =1;	
+	char name[100],number[15];
+	printf("please enter your full name:");
+	fflush(stdin);
+	gets(name);
+	fflush(stdin);
+	printf("please enter your number:");
+	fflush(stdin);
+	gets(number);
+	fflush(stdin);
+	fprintf(fc,"\nName: %s number=%s \n Requested to change his room from room no %d to %d",name,number,cr,r);
+	printf("your request has been submitted to the owner");
+				}
+	}
+	if(test==0){
+	printf("the choosen room is reserved please choose another room");
+	}
+	fclose(fc);
+}
+
+//=========================================================changing room function ends here
+
+complains()
+{
+	FILE *fc;
+	char comp[1000];
+	char name[100];
+	fc= fopen("C:\\Users\\A.S Computers\\Desktop\\project functions\\complains.txt","a");
+	printf("please enter your name:");
+	fflush(stdin);
+	fgets(name, sizeof name, stdin);
+    fflush(stdin);
+	fputs(name, fc);
+	printf("Dear user kindly type your complain below:\n");
+	fgets(comp, sizeof comp, stdin);
+	fflush(stdin);
+	fputs(comp, fc);
+	fflush(stdin);
+	printf("your complain has been submitted successfully we will surely look forward to it");
+	fclose (fc);
+}
+rentpay(){
+	FILE *fr;
+	char name[100];
+	char details[1000];
+	int med;
+	fr= fopen("C:\\Users\\A.S Computers\\Desktop\\project functions\\rentpay.txt","a");
+	printf("please enter your name:");
+	fflush(stdin);
+	fgets(name, sizeof name, stdin);
+    fflush(stdin);
+	fputs(name, fr);
+	fflush(stdin);
+	printf("==============choose from the following mediums================\n");
+	printf("press (1) in you want to pay rent through bank account\n");
+	printf("press (2) in you want to pay rent through jazz cash account\n");
+	printf("press (3) in you want to pay rent through easy paisa account\n");
+	printf("press (4) in you want to pay rent through some other medium");
+	printf("\nenter your choice:");
+	scanf("%d",&med);
+	fflush(stdin);
+	switch(med){
+		case(1):
+			printf("\nenter your account number and details below\n");
+			fgets(details, sizeof details, stdin);
+			fflush(stdin);
+			fputs(details, fr);
+			printf("Thank you so much for the payment");
+			break;
+ 		case(2):
+			printf("\nenter your account number and details below\n");
+			fgets(details, sizeof details, stdin);
+			fflush(stdin);
+			fputs(details, fr);
+			printf("Thank you so much for the payment");
+			break;
+		case(3):
+			printf("\nenter your account number and details below\n");
+			fgets(details, sizeof details, stdin);
+			fflush(stdin);
+			fputs(details, fr);
+			printf("Thank you so much for the payment");
+			break;
+		case(4):
+			printf("\nenter your medium of payment's details below\n");
+			fgets(details, sizeof details, stdin);
+			fflush(stdin);
+			fputs(details, fr);
+			printf("Thank you so much for the payment");
+			break;
+	}
+}
+
+//=================================================rent pay function ends here
+
+questions()
+{
+	FILE *fq;
+	char question[1000];
+	char name[100];
+	fq= fopen("C:\\Users\\A.S Computers\\Desktop\\project functions\\questions.txt","a");
+	printf("please enter your name:");
+	fgets(name, sizeof name, stdin);
+    fflush(stdin);
+	fputs(name, fq);
+	fflush(stdin);
+	printf("\nenter your question below\n");
+	fgets(question, sizeof question, stdin);
+	fflush(stdin);
+	fputs(question, fq);
+	fflush(stdin);
+	printf("\nQuestion submitted succefully You will soon get response");
+	fclose (fq);
+}
+
+//========================================staff question function ends here
+
+hostelleave(){
+	int sureity;
+	printf("Are you sure u want too leave hostel?");
+	printf("\npress (1) for 'yes' \npress (2) for 'no' ");
+	printf("\nwhat do you choose: ");
+	scanf("%d",&sureity);
+	fflush(stdin);
+	switch(sureity){
+		case(1):
+			FILE *fl;
+			char reason[1000];
+			char name[100];
+			fl= fopen("C:\\Users\\A.S Computers\\Desktop\\project functions\\hostel leave.txt","a");
+			printf("please enter your name:");
+			fflush(stdin);
+			fgets(name, sizeof name, stdin);
+    		fflush(stdin);
+			fputs(name, fl);
+			fflush(stdin);
+			printf("\nenter the reason below so that we can make it sure that your next stay feels better\n");
+			fflush(stdin);
+			fgets(reason, sizeof reason, stdin);
+			fflush(stdin);
+			fputs(reason, fl);
+			printf("\nyou will be missed!");
+			fclose (fl);
+			break;
+		case(2):
+			printf("thank God");
+	}
+}
+
+
+//=====================================================leave hostel funtion ends here
+
+changepassword(int i){
+	FILE *fu;
+	int z=0,a=0;
+	char line[100];
+	char password[100];
+	char newpassword[100];
+	fu=fopen("passwords.txt","r");
+	printf("enter your current password:");
+	fflush(stdin);
+	gets(password);
+	if(fu!=NULL)
+	{
+		while(!feof(fu)){
+			fscanf(fu, "%s", line);
+			if(a==i){
+			if(strcmp(line,password)==0){
+			printf("enter your new password:");
+			fflush(stdin);
+			fgets(newpassword, sizeof(newpassword), stdin);
+    		fprintf(fu, "%s", newpassword);	
+			fclose(fu);
+			z=1;
+			break;
+			}
+		}
+			else
+			a++;
+		}
+	}
+
+	else
+	printf("could not find file");
+	if(z==0)
+	printf("inncorect password");
+	fclose(fu);
+}
+
+//=========================================change password function ends here
+
+choice(int i){
+	int userchoice;
+	printf("====================welcome=========================");
+	printf("\n Dear user choose freom the following\n");
+	printf(" press (1) for booking a room");
+	printf("\n press (2) for changing room");
+	printf("\n press (3) for leaving Hostel");
+	printf("\n press (4) for paying Rent");
+	printf("\n press (5) for submitting any compains");
+	printf("\n press (6) for Asking any quetion from the staff");
+	printf("\n press (7) for logging out");
+	printf("\n press (8) for changing your password");
+	printf("\n\n enter your choice: ");
+	scanf("%d",&userchoice);
+	switch(userchoice){
+		case(1):
+				booking();
+			break;
+			case(2):
+				changeroom();
+				break;
+				case(3):
+					hostelleave();
+					break;
+					case(4):
+						rentpay();
+						break;
+						case(5):
+							complains();
+							break;
+							case(6):
+								questions();
+								break;	
+									case(7):
+										printf("log out");
+											break;
+											case(8):
+												changepassword(i);
+													break;
+													default:
+														printf("please choose the correct choice");}
+	}
+password(int i){
+   char password[128], c;
+   int index = 0;
+  	FILE *fu;
+	int z=0,a=0;
+	char line[100];
+	fu=fopen("F:\\passwords.txt","r");
+   printf("\nEnter Password :");
+   /* 13 is ASCII value of Enter key */
+   while((c = getch()) != 13){
+       if(index < 0)
+           index = 0;
+       /* 8 is ASCII value of BACKSPACE character */
+       if(c == 8){
+           putch('\b');
+           putch(NULL);
+           putch('\b');
+           index--;
+       continue;
+       }
+       password[index++] = c;
+       putch('*');
+   }
+   password[index] = '\0';
+  	if(fu!=NULL)
+	{
+		while(!feof(fu)){
+			fscanf(fu, "%s", line);
+			if(a==i){
+			if(strcmp(line,password)==0){
+			printf("\nlogin succesfull\n");
+			z=1;
+			choice(i);
+			}
+			else
+			a++;
+		}
+					}
+	}
+  	else
+	printf("\ncould not find file");
+	if(z==0)
+	printf("\nincorect password please try again");
+	fclose(fu);
+}
+                     
+hostelers()
+{
+	FILE *fp;
+	int z=0,i=0;
+	char line[100];
+	char username[100];
+	fflush(stdin);
+	fp=fopen("F:\\usernames.txt","r");
+	printf("enter username:");
+	fflush(stdin);
+	gets(username);
+	fflush(stdin);
+	if(fp!=NULL)
+	{
+		while(!feof(fp)){
+			fscanf(fp,"%s", line);
+			if(strcmp(line,username)==0){
+			z=1;
+			password(i);}
+			else
+			i++;
+		}
+	}
+	else
+	printf("could not find file");
+	if(z==0)
+	printf("incorrect username please try again");
+	fclose(fp);
+}                
+                
+                           
+//====================================================================
+
+
+//=====================================================================
+
+
+
+int pay_rent(){		// Function of Hosteler Module, needs further code
+	char line[10000],i=0;
+	printf("following people have submitted the complains ");
+	FILE *fr;
+	fr= fopen("C:\\Users\\A.S Computers\\Desktop\\project functions\\rentpay.txt","r");
+	while(!feof(fr)){
+	 fgets(line, sizeof(line), fr);
+	 puts(line);
+	}
+	fclose(fr);
+}
+
+showcomplains(){		// Function of Hosteler Module, needs further code
+	char line[10000],i=0;
+	printf("following people have submitted the complains ");
+	FILE *fr;
+	fr= fopen("C:\\Users\\A.S Computers\\Desktop\\project functions\\complains.txt","r");
+	while(!feof(fr)){
+	 fgets(line, sizeof(line), fr);
+	 puts(line);
+	}
+	fclose(fr);
+}
+
+int changingroom(){		// Function of Hosteler Module, needs further code
+	char line[10000];
+	printf("following people have requested for room change ");
+	FILE *fr;
+	fr= fopen("C:\\Users\\A.S Computers\\Desktop\\project functions\\changeroom.txt","r");
+	while(!feof(fr)){
+	 fgets(line, sizeof(line), fr);
+	 puts(line);
+	}
+	fclose(fr);
+}
+
+
+roomorders(){
+	char line[10000];
+	printf("following people ordered room:");
+	FILE *fr;
+	fr= fopen("C:\\Users\\A.S Computers\\Desktop\\project functions\\booking.txt","r");
+	while(!feof(fr)){
+	 fgets(line, sizeof(line), fr);
+	 puts(line);
+	}
+	fclose(fr);
+}
+
+
+int decrease_rent(){	// Admin can decrease rent
+	int x;
+	printf("How much do you want to decrease: ");
+	scanf("%d", &x);
+	if(x>=0){
+		rent = rent - x;
+		printf("New rent is : %d",rent);
+	}
+}
+
+int rent_increase(){	// Admin can increase rent
+	int x;
+	printf("How much do you want to increase: ");
+	scanf("%d", &x);
+	rent = rent + x;
+	printf("New rent is : %d",rent);
+}
+
+int empty_rooms(int y[10]){	// For making the room empty. Needs further improvement. I am on it.
+   	FILE *fptr;
+	int i;
+	char c[10];
+	char emp[]={"empty"};
+	printf("Which room do you want to Empty: ");
+	int x;
+	scanf("%d", &x);
+	fptr = fopen("C:/Users/Ali  Computers/Desktop/Fast/Programming/Project/rooms.txt", "r");	
+
+    fscanf(fptr, "%s", c);
+
+	if(strcmp(c,emp)==0)
+	{
+		fptr = fopen("C:/Users/Ali  Computers/Desktop/Fast/Programming/Project/rooms.txt", "w");
+		printf("Enter Status for Room %d: ", x);
+		scanf("%d",&rooms[x+1]);
+		fprintf(fptr,"%d",rooms[x+1]);
+	}
+	else
+		printf("Room %d: Already Empty\n", x);
+	fclose(fptr);
+}
+
+int check_rooms(int y[10]){	// Checking the status for rooms
+	FILE *fptr;
+	int i;
+	char c[10];
+	fptr = fopen("C:/Users/Ali  Computers/Desktop/Fast/Programming/Project/rooms.txt", "r");	
+
+   fscanf(fptr, "%[^\n]", c);	// Reading the file rooms.txt into an array c[]
+	
+	for(i=0; i<10; i++)
+    {
+		if(c[i]=='0')			// Checking if empty of not
+			printf("Room %d: Empty\n", i+1);
+		else
+			printf("Room %d: Reserved\n", i+1);
+	}
+	fclose(fptr);
+}
+
+int create_rooms(int y[10]){	// Creating Rooms. Used for one time.
+	// Using filing I made a file, rooms.txt then added the contents whether it is empty = 0; or reserved = 1;
+    FILE *fptr;
+	int i;
+	printf("Input 0 for Available\nInput 1 for Reserved\n");	
+	fptr = fopen("C:/Users/Ali  Computers/Desktop/Fast/Programming/Project/rooms.txt", "w");	
+	for(i=0; i<10; i++)
+	{
+		printf("Enter Status for Room %d: ", i+1);
+		scanf("%d",&rooms[i]);
+		fprintf(fptr,"%d",rooms[i]);
+	}
+	fclose(fptr);
+}
+
+int change_pass(){ // Again using the filing to update the password
+	char pass[30];
+	FILE *fptr;
+	
+	printf("Enter New Password: ");
+	fptr = fopen("C:\\Users\\A.S Computers\\Desktop\\admin_pass.txt", "w");	
+	fflush(stdin);
+	fgets(pass, sizeof(pass), stdin);
+    fprintf(fptr, "%s", pass);	
+	fclose(fptr);
+}
+
+
+int check_pass(char s[100]){ // Checks the password from the file and if it is correct then shows the menu of all functions
+	
+	int i;
+	char c[15]={"PAK"};	
+	// note plz give the particular directory of your pc	
+	if(strcmp(s,c) == 0) // comparing both the strings, one from the function argument and one from the admin_pass.txt that is stored it c[]
+    {
+    	int admin_choice;
+        system("cls");
+        printf("\n\t\t\t\t\t\tWelcome\n");
+        printf("\nFunctions:\n");
+        printf("\n1. Add Rooms\n");
+        printf("2. Check Rooms\n");
+        printf("3. Empty Rooms\n");
+        printf("4. Increase Rent\n");
+        printf("5. Decrease Rent\n");
+        printf("6. Pay Bill\n");
+        printf("7. Remove any Hosteler\n");
+        printf("8. Change Password\n");
+        printf("9. Log Out\n");
+        printf("10. See all room orders");
+        printf("11. Know about all the complains");
+        printf("12. All orders for changing room");
+        printf("13. All rent payments");
+		printf("\nSelect any Task: ");
+        scanf("%d", &admin_choice);
+        system("cls");
+		switch(admin_choice)
+		{
+			case 1:
+					create_rooms(rooms);
+					break;
+						case 2:
+							check_rooms(rooms);
+							break;
+							case 3:
+								empty_rooms(rooms);
+								break;
+								case 4:
+										rent_increase();
+										break;
+										case 5:
+										   	decrease_rent();
+											   break;
+											   case 8:
+											   		change_pass();
+											   		break;
+											   			case 9:
+											   				logout();
+											   				break;
+											   				     case 10:
+														    		roomorders();
+														    		break;
+														    			case 11:
+														    				showcomplains();
+														    				break;
+														    					case 12:
+														    					return 0;
+														    						break;
+														    							case 13:
+														    								pay_rent();
+														   										default:
+											   			  											printf("\nEnter a valid Input\n");}	
+	}else
+		printf("Wrong Password.");
+}
+
+int controlflow(){ // Basic control manager of the project
+    int choice, any=0;
+    system("color 5F");
+    printf("\n\n\n\t\t\t\t\tHotel Management Software");
+    printf("\n\n\t\t\t\t\t\t Welcome\n\n");
+
+    printf("Select who are You:\n\n");
+    printf("1. Administrator\n");
+    printf("2. Hosteler\n");
+    printf("3. Staff\n\n");
+
+    printf("Note: 1 for Administrator. 2 for User. 3 for Staff.\n");
+    printf("Choose: ");
+    
+    scanf("%d", &choice);
+
+    switch(choice)
+    {
+
+    case 1:	// Here goes all the information of the admin and functions related to it.
+        {
+            char admin_username[100], admin_password[100];
+            printf("Enter Username: ");
+            scanf("%s", &admin_username);
+            if(strcmp(admin_username, "Bahadur")==0)
+            {
+                printf("Enter Password: ");
+                scanf("%s", &admin_password);    
+                check_pass(admin_password);
+     		}
+            else
+                printf("\nWrong Username.\n\n");
+            break;
+        }
+
+    case 2: // Here goes all the information/functions and other data related to the hosteler
+        {
+            system("cls");
+            printf("\n\t\t\t\t\t\tWelcome Hosteler\n");
+            hostelers();
+			break;
+        }
+
+    case 3: // Here goes all the information and other date related to the hosteler
+        {
+            system("cls");
+            printf("\n\t\t\t\t\t\tWelcome Staff Member\n");
+            break;
+        }
+    default:
+    	{
+        printf("\nInvalid Choice.\n");
+        break;
+    	}
+    }
+
+}
+
+//====================================================================
+
+
+//=====================================================================
+
+int logout(){ // Simple Logout Function
+    controlflow();
+
+}
+
+int main(void){
+    controlflow();
+}
